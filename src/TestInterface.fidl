@@ -1,0 +1,226 @@
+package test
+
+interface TestInterface {
+	version {
+		major 1
+		minor 0
+	}
+
+	attribute MyStruct myStructAttribute
+
+	attribute Int32 myAttribute
+
+	attribute OtherEnum myEnumAttribute
+
+	attribute ArrayOfStruct myArrayOfStruct
+
+	attribute ArrayOfInt myArrayOfInt
+
+	method TakeIntReturnIntWait {
+		in {
+			Int32 input
+		}
+		out {
+			Int32 output2
+		}
+	}
+
+	method TakeIntReturnInt {
+		in {
+			Int32 input
+		}
+		out {
+			Int32 output2
+		}
+	}
+
+	method TakeStringReturnString {
+		in {
+			String input
+		}
+		out {
+			String output
+		}
+	}	
+	
+	method TakeBoolReturnBool {
+		in {
+			Boolean input
+		}
+		out {
+			Boolean output
+		}
+	}
+	
+	method takeUnionReturnUnion {
+		in {
+			MyUnion input
+		}
+		out {
+			MyUnion output
+		}
+	}
+
+	method takeStructReturnStruct {
+		in {
+			MyStruct input
+		}
+		out {
+			MyStruct output
+		}
+	}
+	
+	method takeEnumReturnEnum {
+		in {
+			OtherEnum input
+		}
+		out {
+			OtherEnum output
+		}
+	}
+	
+	method takeArrayOfStructReturnArrayOfStruct {
+		in {
+			ArrayOfStruct input
+		}
+		out {
+			ArrayOfStruct output
+		}
+	}
+
+	method TestMethod {
+		in {
+			Int32 input
+			String stringParam
+		}
+		out {
+			Int32 val1
+			Int32 val2
+		}
+	}
+	
+	method OtherTestMethod {
+		out {
+			String greeting
+			Int32 identifier
+		}
+	}
+	
+	method methodWithStruct {
+		in {
+			MyStruct param1
+		}
+		out {
+			MyStruct paramOut
+		}
+	}
+	
+	method triggerBroadcast {
+	}
+	
+	method methodWithUnion {
+		in {
+			MyUnion inParam
+		}
+		out {
+			MyUnion outParam
+		}
+	}
+	
+	method methodWithMap {
+		in {
+			MyMap param
+		}
+	}
+
+	broadcast MyBroadcast {
+		out {
+			String message
+			
+		}
+	}
+
+	broadcast MyBroadcastWithUnion {
+		out {
+			MyUnion param			
+		}
+	}
+
+	broadcast broadcastWithStruct {
+		out {
+			MyStruct value
+		}
+	}
+
+
+	broadcast broadcastWithEnum {
+		out {
+			OtherEnum value
+		}
+	}
+
+
+	<**
+		@description : Custom struct 
+	**>
+	struct MyStruct {
+		Int32 intField
+		String stringField
+		Boolean boolField
+		OtherEnum enumField
+		MySubStruct subStructField
+		MyUnion unionField
+		ArrayOfInt array_
+	}
+
+	struct MySubStruct {
+		Int32 intField
+		String stringField
+	}
+
+	array ArrayOfStruct of MyStruct
+
+	array ArrayOfInt of Int16
+
+	union MyUnion {
+		Int16 int16Value
+		String stringValue
+	}
+
+	map MyMap {
+		Boolean to String
+	}
+
+	enumeration OtherEnum {
+		VALUE_1
+		VALUE_2
+		VALUE_3
+	}
+
+	<**
+		@description : Common errors. 
+	**>
+	enumeration TestEnum {
+
+		<**
+			@description : default 
+		**>
+		E_UNKNOWN = "0x00"
+
+		<**
+			@description : no error - positive reply 
+		**>
+		E_OK = "0x01"
+
+		<**
+			@description : value out of range 
+		**>
+		E_OUT_OF_RANGE = "0x02"
+
+		<**
+			@description : not used 
+		**>
+		E_NOT_USED = "0x03"
+	}
+
+}

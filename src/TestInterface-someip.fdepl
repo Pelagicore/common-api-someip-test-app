@@ -1,0 +1,17 @@
+import "classpath:/SomeIPSpecification.fdepl"
+
+import "TestInterface.fidl"
+
+define someip.ServiceSpecification for interface test.TestInterface {
+
+	ServiceID = 3243
+
+	method methodWithStruct {
+		MemberID = 3568
+	}
+
+	broadcast MyBroadcast {
+		MemberID = 9854
+	}
+
+}
