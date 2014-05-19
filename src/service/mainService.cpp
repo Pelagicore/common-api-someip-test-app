@@ -12,8 +12,6 @@ LOG_DECLARE_DEFAULT_CONTEXT(testServiceContext, "LOG", "Default");
 
 using namespace SomeIP_utils;
 
-static bool bStopThreads = false;
-
 class MyService : public TestServiceImplementation {
 
 	static const int NOTIFICATION_CYCLE_DURATION = 10000;
