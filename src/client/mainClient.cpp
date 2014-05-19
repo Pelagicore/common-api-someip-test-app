@@ -8,6 +8,8 @@
 
 #include "GLibCommonAPIFactory.h"
 
+#include <exception>
+
 namespace test {
 
 LOG_DECLARE_DEFAULT_CONTEXT(testServiceContext, "test", "test");
@@ -89,6 +91,9 @@ public:
 	void init() {
 
 		proxy = m_commonAPIGlibFactory.buildProxy<test::TestInterfaceProxy>();
+
+		if (proxy.get() == nullptr)
+			throw std::exception();
 
 		getProxy().getProxyStatusEvent().subscribe(
 			[&](const CommonAPI::AvailabilityStatus & availability) {
