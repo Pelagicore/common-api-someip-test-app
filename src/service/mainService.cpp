@@ -14,7 +14,7 @@ using namespace SomeIP_utils;
 
 class MyService : public TestServiceImplementation {
 
-	static const int NOTIFICATION_CYCLE_DURATION = 10000;
+	static const int NOTIFICATION_CYCLE_DURATION = 5000;
 
 public:
 	MyService() :
@@ -64,7 +64,7 @@ public:
 	}
 
 	void onCyclic() {
-		log_verbose("onCyclic");
+//		log_verbose("onCyclic");
 		return;
 	}
 

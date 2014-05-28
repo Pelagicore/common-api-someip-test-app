@@ -197,29 +197,9 @@ interface TestInterface {
 		VALUE_3
 	}
 
-	<**
-		@description : Common errors. 
-	**>
 	enumeration TestEnum {
-
-		<**
-			@description : default 
-		**>
-		E_UNKNOWN = "0x00"
-
-		<**
-			@description : no error - positive reply 
-		**>
+		E_ERROR = "0x00"
 		E_OK = "0x01"
-
-		<**
-			@description : value out of range 
-		**>
-		E_OUT_OF_RANGE = "0x02"
-
-		<**
-			@description : not used 
-		**>
 		E_NOT_USED = "0x03"
 	}
 
