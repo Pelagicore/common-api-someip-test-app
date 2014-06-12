@@ -1,4 +1,4 @@
-import "classpath:/SomeIPSpecification.fdepl"
+import "classpath:/someip/SomeIPSpecification.fdepl"
 
 import "TestInterface.fidl"
 
