@@ -37,7 +37,7 @@ public:
 		output.push_back(s);
 	}
 
-	void TakeIntReturnIntWait(int32_t input, int32_t& output) override {
+	void TakeIntReturnIntWait(int32_t input, TestTypes::TestError& methodError, int32_t& output) override {
 		log_info("sleeping 5 seconds");
 		sleep(5);
 		TakeIntReturnInt(input, output);
@@ -188,14 +188,14 @@ public:
 		//	override
 	}
 
-	void setMyArrayOfIntAttribute(TestInterface::ArrayOfInt array) override {
+	void setMyArrayOfIntAttribute(TestTypes::ArrayOfInt array) override {
 	}
 
 	const TestInterface::ArrayOfStruct& getMyArrayOfStructAttribute() {
 		return m_arrayOfStructAttribute;
 	}
 
-	const TestInterface::ArrayOfInt& getMyArrayOfIntAttribute() {
+	const TestTypes::ArrayOfInt& getMyArrayOfIntAttribute() {
 		return m_arrayOfIntAttribute;
 	}
 
@@ -204,7 +204,7 @@ protected:
 	TestInterface::MyStruct m_myStructAttribute;
 	TestInterface::OtherEnum m_enumAttribute = TestInterface::OtherEnum::VALUE_1;
 	TestInterface::ArrayOfStruct m_arrayOfStructAttribute;
-	TestInterface::ArrayOfInt m_arrayOfIntAttribute;
+	TestTypes::ArrayOfInt m_arrayOfIntAttribute;
 
 };
 

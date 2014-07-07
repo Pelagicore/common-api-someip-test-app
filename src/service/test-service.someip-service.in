@@ -1,5 +1,5 @@
 [Service]
 ServiceID=3243
-ExecStart=@prefix@/bin/common-api-test-service
+ExecStart=@prefix@/bin/common-api-someip-test-service
 WorkingDirectory=@prefix@/bin
 SystemdService=test-service

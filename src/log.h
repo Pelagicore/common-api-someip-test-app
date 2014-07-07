@@ -1,13 +1,15 @@
 #pragma once
 
 #include "ivi-logging.h"
-#include "log-console.h"
+#include "ivi-logging-console.h"
 
 #ifdef ENABLE_DLT_LOGGING
-#include "log-dlt.h"
+#include "ivi-logging-dlt.h"
 #endif
 
 namespace test {
+
+#ifdef DISABLE_LOGGING
 
 typedef logging::LogContextT<
 	logging::TypeSet<logging::ConsoleLogContext
@@ -19,5 +21,13 @@ typedef logging::LogContextT<
 					     , logging::DltContextClass::LogDataType
 #endif
 					     > > LogContext;
+
+#else
+
+typedef logging::LogContextT<
+	logging::TypeSet<>,
+	logging::TypeSet<> > LogContext;
+
+#endif
 
 }

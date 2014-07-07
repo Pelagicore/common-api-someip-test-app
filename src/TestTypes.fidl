@@ -1,0 +1,21 @@
+package test
+
+typeCollection TestTypes {
+
+	version {
+		major 1
+		minor 0
+	}
+	
+	map MyMap2 {
+		Boolean to String
+	}
+
+	enumeration TestError {
+		ERROR1
+		ERROR2
+	}
+
+	array ArrayOfInt of Int16
+
+}

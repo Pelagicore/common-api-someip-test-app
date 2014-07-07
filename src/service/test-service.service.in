@@ -2,7 +2,7 @@
 Description=SomeIP test application
 
 [Service]
-ExecStart=@prefix@/bin/common-api-test-service
+ExecStart=@prefix@/bin/common-api-someip-test-service
 LimitCORE=infinity
 
 [Install]
