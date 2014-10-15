@@ -7,6 +7,7 @@
 #include "ivi-logging-dlt.h"
 #endif
 
+namespace someip {
 namespace test {
 
 #ifdef DISABLE_LOGGING
@@ -30,4 +31,5 @@ typedef logging::LogContextT<
 
 #endif
 
+}
 }

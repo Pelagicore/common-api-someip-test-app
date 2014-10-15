@@ -1,4 +1,4 @@
-package test
+package someip.test
 
 typeCollection TestTypes {
 

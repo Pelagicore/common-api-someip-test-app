@@ -4,11 +4,14 @@
 #include "utilLib/GlibIO.h"
 
 #include "TestService.h"
-#include "test/TestInterfaceProxy.h"
+#include "someip/test/TestInterfaceProxy.h"
 
 #include "GLibCommonAPIFactory.h"
 
 #include <exception>
+
+
+namespace someip {
 
 namespace test {
 
@@ -49,14 +52,14 @@ public:
 	TheApp() :
 		SomeIP_utils::MainLoopApplication(), m_timer([&]() {
 								     onCyclic();
-							     }, 800) {
+							     }, 800, getMainContext() ) {
 	}
 
 	void callTestMethodBlocking() {
 		CommonAPI::CallStatus callStatus;
 		int32_t val1;
 		int32_t val2;
-		getProxy().TestMethod(0x01234567, "My String", callStatus, val1, val2);
+		getProxy().testMethod(0x01234567, "My String", callStatus, val1, val2);
 		log_info("Result from method : callStatus: %i, val1:%X, val2:%X",
 			 static_cast<int>(callStatus), val1, val2);
 	}
@@ -90,7 +93,7 @@ public:
 
 	void init() {
 
-		proxy = m_commonAPIGlibFactory.buildProxy<test::TestInterfaceProxy>();
+		proxy = m_commonAPIGlibFactory.buildProxy<someip::test::TestInterfaceProxy>();
 
 		if (proxy.get() == nullptr)
 			throw std::exception();
@@ -168,7 +171,7 @@ public:
 		CommonAPI::CallStatus callStatus;
 		int32_t val1;
 		int32_t val2;
-		getProxy().TestMethod(0x3456, "My String", callStatus, val1, val2);
+		getProxy().testMethod(0x3456, "My String", callStatus, val1, val2);
 		log_debug() << "Result from method : " << val1 << val2;
 	}
 
@@ -189,10 +192,10 @@ public:
 		int32_t inputValue = randomNumber;
 		int32_t outputValue;
 		CommonAPI::CallStatus callStatus;
-		getProxy().TakeIntReturnInt(inputValue, callStatus, outputValue);
+		getProxy().takeIntReturnInt(inputValue, callStatus, outputValue);
 
 		int32_t referenceOutputValue;
-		m_localService.TakeIntReturnInt(inputValue, referenceOutputValue);
+		m_localService.takeIntReturnInt(inputValue, referenceOutputValue);
 
 		return (outputValue == referenceOutputValue);
 	}
@@ -205,10 +208,10 @@ public:
 
 		std::string outputValue;
 		CommonAPI::CallStatus callStatus;
-		getProxy().TakeStringReturnString(inputValue, callStatus, outputValue);
+		getProxy().takeStringReturnString(inputValue, callStatus, outputValue);
 
 		std::string referenceOutputValue;
-		m_localService.TakeStringReturnString(inputValue, referenceOutputValue);
+		m_localService.takeStringReturnString(inputValue, referenceOutputValue);
 
 		return (outputValue == referenceOutputValue);
 	}
@@ -324,10 +327,11 @@ public:
 };
 
 }
+}
 
 int main(int argc, char* argv[]) {
 
-	test::TheApp app;
+	someip::test::TheApp app;
 	app.init();
 	app.run();
 

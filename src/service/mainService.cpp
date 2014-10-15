@@ -6,6 +6,8 @@
 #include "utilLib/MainLoopApplication.h"
 #include "utilLib/GlibIO.h"
 
+namespace someip {
+
 namespace test {
 
 LOG_DECLARE_DEFAULT_CONTEXT(testServiceContext, "LOG", "Default");
@@ -27,8 +29,8 @@ public:
 	void onCyclic() {
 		m_enumAttribute =
 			getMyAttributeAttribute() % 2 ?
-			test::TestInterface::OtherEnum::VALUE_3 :
-			test::TestInterface::OtherEnum::VALUE_2;
+			someip::test::TestInterface::OtherEnum::VALUE_3 :
+			someip::test::TestInterface::OtherEnum::VALUE_2;
 		fireMyEnumAttributeAttributeChangedNotification();
 	}
 
@@ -77,9 +79,11 @@ public:
 
 }
 
+}
+
 int main(int argc, char* argv[]) {
 
-	test::TheApp app;
+	someip::test::TheApp app;
 	app.init();
 	app.run();
 

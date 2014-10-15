@@ -1,6 +1,6 @@
-package test
+package someip.test
 
-import test.TestTypes from "TestTypes.fidl"
+import someip.test.TestTypes from "TestTypes.fidl"
 
 interface TestInterface {
 	version {
@@ -16,19 +16,19 @@ interface TestInterface {
 
 	attribute ArrayOfStruct myArrayOfStruct
 
-	attribute test.TestTypes.ArrayOfInt myArrayOfInt
+	attribute someip.test.TestTypes.ArrayOfInt myArrayOfInt
 
-	method TakeIntReturnIntWait {
+	method takeIntReturnIntWait {
 		in {
 			Int32 input
 		}
 		out {
 			Int32 output2
 		}
-		error test.TestTypes.TestError
+//		error someip.test.TestTypes.TestError
 	}
 
-	method TakeIntReturnInt {
+	method takeIntReturnInt {
 		in {
 			Int32 input
 		}
@@ -37,7 +37,7 @@ interface TestInterface {
 		}
 	}
 
-	method TakeStringReturnString {
+	method takeStringReturnString {
 		in {
 			String input
 		}
@@ -46,7 +46,7 @@ interface TestInterface {
 		}
 	}	
 	
-	method TakeBoolReturnBool {
+	method takeBoolReturnBool {
 		in {
 			Boolean input
 		}
@@ -91,7 +91,7 @@ interface TestInterface {
 		}
 	}
 
-	method TestMethod {
+	method testMethod {
 		in {
 			Int32 input
 			String stringParam
@@ -102,7 +102,7 @@ interface TestInterface {
 		}
 	}
 	
-	method OtherTestMethod {
+	method otherTestMethod {
 		out {
 			String greeting
 			Int32 identifier
@@ -139,7 +139,6 @@ interface TestInterface {
 	broadcast MyBroadcast {
 		out {
 			String message
-			
 		}
 	}
 
@@ -155,13 +154,17 @@ interface TestInterface {
 		}
 	}
 
+	broadcast broadcastWithPolymorphicStruct {
+		out {
+			MyPolymorphicStruct value
+		}
+	}
 
 	broadcast broadcastWithEnum {
 		out {
 			OtherEnum value
 		}
 	}
-
 
 	<**
 		@description : Custom struct 
@@ -173,7 +176,7 @@ interface TestInterface {
 		OtherEnum enumField
 		MySubStruct subStructField
 		MyUnion unionField
-		test.TestTypes.ArrayOfInt array_
+		someip.test.TestTypes.ArrayOfInt array_
 	}
 
 	struct MySubStruct {
@@ -205,10 +208,20 @@ interface TestInterface {
 		E_NOT_USED = "0x03"
 	}
 
-//	enumeration TestError {
-//		E_ERROR = "0x00"
-//		E_OK = "0x01"
-//		E_NOT_USED = "0x03"
-//	}
+	struct MyPolymorphicStruct polymorphic {
+		String baseString
+	}
+
+	struct MyExtendedStruct1 extends MyPolymorphicStruct {
+		Boolean myBool
+	}
+
+	struct MyExtendedStruct2 extends MyPolymorphicStruct {
+		Int32 myInt
+	}
+
+	struct MyExtendedStruct3 extends MyExtendedStruct2 {
+		String myString
+	}
 
 }

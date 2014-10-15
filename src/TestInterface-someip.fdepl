@@ -2,7 +2,7 @@ import "classpath:/someip/SomeIPSpecification.fdepl"
 
 import "TestInterface.fidl"
 
-define someip.ServiceSpecification for interface test.TestInterface {
+define someip.ServiceSpecification for interface someip.test.TestInterface {
 
 	ServiceID = 3243
 

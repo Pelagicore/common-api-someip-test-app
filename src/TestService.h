@@ -1,7 +1,9 @@
 #pragma once
 
 #include "log.h"
-#include "test/TestInterfaceServiceAbstract.h"
+#include "someip/test/TestInterfaceServiceAbstract.h"
+
+namespace someip {
 
 namespace test {
 
@@ -37,22 +39,22 @@ public:
 		output.push_back(s);
 	}
 
-	void TakeIntReturnIntWait(int32_t input, TestTypes::TestError& methodError, int32_t& output) override {
+	void takeIntReturnIntWait(int32_t input, int32_t& output) override {
 		log_info("sleeping 5 seconds");
 		sleep(5);
-		TakeIntReturnInt(input, output);
+		takeIntReturnInt(input, output);
 	}
 
-	void TakeIntReturnInt(int32_t input, int32_t& output) override {
+	void takeIntReturnInt(int32_t input, int32_t& output) override {
 		output = input + 5;
 	}
 
-	void TakeStringReturnString(std::string input, std::string& output) override {
+	void takeStringReturnString(std::string input, std::string& output) override {
 		output = input;
 		output += " / Answer string";
 	}
 
-	void TakeBoolReturnBool(bool input, bool& output) override {
+	void takeBoolReturnBool(bool input, bool& output) override {
 		output = !input;
 	}
 
@@ -68,13 +70,13 @@ public:
 		output = input;
 	}
 
-	void TestMethod(int32_t input, std::string stringParam, int32_t& val1, int32_t& val2) override {
+	void testMethod(int32_t input, std::string stringParam, int32_t& val1, int32_t& val2) override {
 		//		log_debug("TestMethod with params : 0x%X, string : %s", input, stringParam.c_str());
 		val1 = 0x01234567;
 		val2 = 0x89ABCDEF;
 	}
 
-	void OtherTestMethod(std::string& greeting, int32_t& identifier) override {
+	void otherTestMethod(std::string& greeting, int32_t& identifier) override {
 		log_info("OtherTestMethod()");
 		//		fireMyBroadcastEvent("ABCDEFGHI");
 	}
@@ -98,14 +100,24 @@ public:
 		fireBroadcastWithStructEvent(myStruct);
 
 		TestInterface::MyUnion param;
+
+		auto s1 = std::make_shared<TestInterface::MyExtendedStruct1>();
+		auto s2 = std::make_shared<TestInterface::MyExtendedStruct2>();
+
 		if (getMyAttributeAttribute() % 2 == 0) {
 			int16_t paramValue = getMyAttributeAttribute();
 			param = paramValue;
 			fireMyBroadcastWithUnionEvent(param);
+			s1->baseString = "MyExtendedStruct1";
+			s1->myBool = true;
+			fireBroadcastWithPolymorphicStructEvent(s1);
 		} else {
 			std::string stringValue = "Now, this is a string";
 			param = stringValue;
 			fireMyBroadcastWithUnionEvent(param);
+			s2->baseString = "MyExtendedStruct2";
+			s2->myInt = 567890;
+			fireBroadcastWithPolymorphicStructEvent(s2);
 		}
 
 		m_myStructAttribute.unionField = param;
@@ -207,5 +219,7 @@ protected:
 	TestTypes::ArrayOfInt m_arrayOfIntAttribute;
 
 };
+
+}
 
 }
